@@ -7,6 +7,14 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/restaurants111" />
+
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
@@ -14,9 +22,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="114dp"
+        android:background="@color/white"
         android:fontFamily="@font/monoton"
         android:padding="10dp"
         android:text="KOOKIE"
         android:textSize="60sp" />
+
 
 </RelativeLayout>

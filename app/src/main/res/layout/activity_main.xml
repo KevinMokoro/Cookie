@@ -28,5 +28,26 @@
         android:text="KOOKIE"
         android:textSize="60sp" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="55dp"
+        android:background="@color/memm"
+        android:hint="Enter your ingredient"
+        android:paddingTop="12sp"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black"
+        android:text="Find Ready Recipes"
+        android:textSize="20sp" />
+
 
 </RelativeLayout>

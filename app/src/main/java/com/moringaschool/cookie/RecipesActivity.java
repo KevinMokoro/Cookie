@@ -2,6 +2,7 @@ package com.moringaschool.cookie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,5 +19,11 @@ public class RecipesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
         ButterKnife.bind(this);
+
+        Intent intent = getIntent();
+        String ingredient = intent.getStringExtra("ingredient");
+        mRecipesTextView.setText("Here are recipes that match your entry: " + ingredient);
+
     }
+
 }

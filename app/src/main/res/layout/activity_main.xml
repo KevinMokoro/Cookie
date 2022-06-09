@@ -29,18 +29,18 @@
         android:textSize="60sp" />
 
     <EditText
+        android:id="@+id/ingredientEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="55dp"
-        android:background="@color/memm"
+        android:background="@color/white"
         android:hint="Enter your ingredient"
         android:paddingTop="12sp"
         android:textColor="@color/black"
         android:textSize="34sp"
-        android:textStyle="normal|bold"
-        android:id="@+id/ingredientEditText"/>
+        android:textStyle="normal|bold" />
 
     <Button
         android:id="@+id/findRecipes"
@@ -51,6 +51,17 @@
         android:text="Find Ready Recipes"
         android:textColor="@color/white"
         android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/aboutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/memm"
+        android:text="About"
+        android:textColor="#311B92"
+        android:textStyle="italic" />
 
 
 </RelativeLayout>

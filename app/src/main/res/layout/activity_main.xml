@@ -43,13 +43,14 @@
         android:id="@+id/ingredientEditText"/>
 
     <Button
+        android:id="@+id/findRecipes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/black"
+        android:background="@color/teal_700"
         android:text="Find Ready Recipes"
-        android:textSize="20sp"
-        android:id="@+id/findRecipes"/>
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

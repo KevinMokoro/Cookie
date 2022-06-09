@@ -39,7 +39,8 @@
         android:paddingTop="12sp"
         android:textColor="@color/black"
         android:textSize="34sp"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:id="@+id/ingredientEditText"/>
 
     <Button
         android:layout_width="match_parent"
@@ -47,7 +48,8 @@
         android:layout_alignParentBottom="true"
         android:background="@color/black"
         android:text="Find Ready Recipes"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:id="@+id/findRecipes"/>
 
 
 </RelativeLayout>

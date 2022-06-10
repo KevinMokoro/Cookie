@@ -5,33 +5,44 @@ import static com.moringaschool.cookie.Constants.EDAMAM_ID;
 import static com.moringaschool.cookie.Constants.SEARCH_TYPE;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moringaschool.cookie.MyRecipesAdapter;
 import com.moringaschool.cookie.R;
+import com.moringaschool.cookie.adapters.RecipeListAdapter;
+import com.moringaschool.cookie.models.Hit;
 import com.moringaschool.cookie.models.MyEdamamRecipeSearchResponse;
+import com.moringaschool.cookie.models.Recipe;
 import com.moringaschool.cookie.network.EdamamApi;
 import com.moringaschool.cookie.network.EdamamClient;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
-
+import retrofit2.Callback;
+import retrofit2.Response;
+import android.util.Log;
 public class RecipesActivity extends AppCompatActivity {
-    @BindView(R.id.recipesTextView) TextView mRecipesTextView;
-    @BindView(R.id.listView) ListView mListView;
-    String [] recipes = new String[] {"ugali", "nyama", "mala", "githeri", "mchele", "omena",
-    "mayai", "chai", "maziwa", "wali", "pizza", "yoo", "juice", "matoke"};
+    private static final String TAG = RecipesActivity.class.getSimpleName();
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
-    String [] sources = new String[] {"kin", "els", "per", "elna", "JAK", "chr", "sim",
-    "sab", "sai", "GEO", "ole", "omu", "tankua", "wakesho"};
+    private RecipeListAdapter mAdapter;
+    public List<Hit> recipes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +50,61 @@ public class RecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         ButterKnife.bind(this);
 
-        MyRecipesAdapter adapter = new MyRecipesAdapter(this, android.R.layout.simple_list_item_1, recipes, sources);
-        mListView.setAdapter(adapter);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?>parent, View view, int position, long l) {
-                String recipe = ((TextView)view).getText().toString();
-                Toast.makeText(RecipesActivity.this, recipe, Toast.LENGTH_LONG).show();
-            }
-        });
 
         Intent intent = getIntent();
         String ingredient = intent.getStringExtra("ingredient");
-        mRecipesTextView.setText("Here are recipes that match your entry: " + ingredient);
 
         EdamamApi client = EdamamClient.getClient();
-        Call<MyEdamamRecipeSearchResponse> call = client.getRecipes(EDAMAM_ID,EDAMAM_API_KEY,SEARCH_TYPE,ingredient);
+        Call<MyEdamamRecipeSearchResponse> call = client.getRecipes(SEARCH_TYPE,ingredient,EDAMAM_ID,EDAMAM_API_KEY);
+
+        call.enqueue(new Callback<MyEdamamRecipeSearchResponse>() {
+            @Override
+            public void onResponse(Call<MyEdamamRecipeSearchResponse> call, Response<MyEdamamRecipeSearchResponse> response) {
+
+                hideProgressBar();
+
+                if (response.isSuccessful()) {
+                    recipes = response.body().getHits();
+                    mAdapter = new RecipeListAdapter(RecipesActivity.this, recipes);
+                    mRecyclerView.setAdapter(mAdapter);
+                    RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(RecipesActivity.this);
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setHasFixedSize(true);
+
+//                    Log.e(TAG,String.valueOf(recipe));
+                    showRecipes();
+                } else {
+                    showUnsuccessfulMessage();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyEdamamRecipeSearchResponse> call, Throwable t) {
+                hideProgressBar();
+                showFailureMessage();
+            }
+
+        });
+
 
     }
+    private void showFailureMessage() {
+        mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showUnsuccessfulMessage() {
+        mErrorTextView.setText("Something went wrong. Please try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showRecipes() {
+        mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
 
 }

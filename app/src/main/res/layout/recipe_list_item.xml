@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/restaurantImageView"
+        android:id="@+id/recipeImageView"
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"

@@ -1,6 +1,8 @@
-package com.moringaschool.cookie;
+package com.moringaschool.cookie.network;
 
 import static com.moringaschool.cookie.Constants.EDAMAM_BASE_URL;
+
+import com.moringaschool.cookie.network.EdamamApi;
 
 import java.io.IOException;
 
@@ -14,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EdamamClient {
     private  static Retrofit retrofit = null;
 
-    public  static  EdamamApi getClient(){
+    public  static EdamamApi getClient(){
         if (retrofit == null){
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .addInterceptor(new Interceptor() {

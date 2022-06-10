@@ -1,4 +1,8 @@
-package com.moringaschool.cookie;
+package com.moringaschool.cookie.ui;
+
+import static com.moringaschool.cookie.Constants.EDAMAM_API_KEY;
+import static com.moringaschool.cookie.Constants.EDAMAM_ID;
+import static com.moringaschool.cookie.Constants.SEARCH_TYPE;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +14,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.moringaschool.cookie.MyRecipesAdapter;
+import com.moringaschool.cookie.R;
+import com.moringaschool.cookie.models.MyEdamamRecipeSearchResponse;
+import com.moringaschool.cookie.network.EdamamApi;
+import com.moringaschool.cookie.network.EdamamClient;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
 
 public class RecipesActivity extends AppCompatActivity {
     @BindView(R.id.recipesTextView) TextView mRecipesTextView;
@@ -42,6 +53,9 @@ public class RecipesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String ingredient = intent.getStringExtra("ingredient");
         mRecipesTextView.setText("Here are recipes that match your entry: " + ingredient);
+
+        EdamamApi client = EdamamClient.getClient();
+        Call<MyEdamamRecipeSearchResponse> call = client.getRecipes(EDAMAM_ID,EDAMAM_API_KEY,SEARCH_TYPE,ingredient);
 
     }
 

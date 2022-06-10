@@ -1,4 +1,4 @@
-package com.moringaschool.cookie;
+package com.moringaschool.cookie.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.moringaschool.cookie.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

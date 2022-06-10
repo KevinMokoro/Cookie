@@ -16,13 +16,13 @@
         android:theme="@style/Theme.Cookie"
         tools:targetApi="31">
         <activity
-            android:name=".AboutActivity"
+            android:name=".ui.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".RecipesActivity"
+            android:name=".ui.RecipesActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>

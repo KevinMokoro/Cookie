@@ -1,25 +1,25 @@
 
-package com.moringaschool.cookie;
+package com.moringaschool.cookie.models;
 
-import javax.annotation.Generated;
+//import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
-public class Links__1 {
+//@Generated("jsonschema2pojo")
+public class Links {
 
     @SerializedName("self")
     @Expose
-    private Self__1 self;
+    private Self self;
     @SerializedName("next")
     @Expose
-    private Next__1 next;
+    private Next next;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Links__1() {
+    public Links() {
     }
 
     /**
@@ -27,25 +27,25 @@ public class Links__1 {
      * @param next
      * @param self
      */
-    public Links__1(Self__1 self, Next__1 next) {
+    public Links(Self self, Next next) {
         super();
         this.self = self;
         this.next = next;
     }
 
-    public Self__1 getSelf() {
+    public Self getSelf() {
         return self;
     }
 
-    public void setSelf(Self__1 self) {
+    public void setSelf(Self self) {
         this.self = self;
     }
 
-    public Next__1 getNext() {
+    public Next getNext() {
         return next;
     }
 
-    public void setNext(Next__1 next) {
+    public void setNext(Next next) {
         this.next = next;
     }
 

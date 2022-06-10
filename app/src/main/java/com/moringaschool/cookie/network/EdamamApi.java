@@ -1,4 +1,6 @@
-package com.moringaschool.cookie;
+package com.moringaschool.cookie.network;
+
+import com.moringaschool.cookie.models.MyEdamamRecipeSearchResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

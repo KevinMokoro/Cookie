@@ -1,12 +1,12 @@
 
-package com.moringaschool.cookie;
+package com.moringaschool.cookie.models;
 
-import javax.annotation.Generated;
+//import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
-public class Regular {
+//@Generated("jsonschema2pojo")
+public class Small {
 
     @SerializedName("url")
     @Expose
@@ -22,7 +22,7 @@ public class Regular {
      * No args constructor for use in serialization
      * 
      */
-    public Regular() {
+    public Small() {
     }
 
     /**
@@ -31,7 +31,7 @@ public class Regular {
      * @param url
      * @param height
      */
-    public Regular(String url, Integer width, Integer height) {
+    public Small(String url, Integer width, Integer height) {
         super();
         this.url = url;
         this.width = width;

@@ -1,8 +1,10 @@
-package com.moringaschool.cookie;
+package com.moringaschool.cookie.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.moringaschool.cookie.R;
 
 public class AboutActivity extends AppCompatActivity {
 

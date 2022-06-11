@@ -6,23 +6,23 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.moringaschool.cookie.models.Hit;
-import com.moringaschool.cookie.models.Links;
+//import com.moringaschool.cookie.models.Links;
 
 //@Generated("jsonschema2pojo")
 public class MyEdamamRecipeSearchResponse {
 
     @SerializedName("from")
     @Expose
-    private Integer from;
+    private Double from;
     @SerializedName("to")
     @Expose
-    private Integer to;
+    private Double to;
     @SerializedName("count")
     @Expose
-    private Integer count;
-    @SerializedName("_links")
-    @Expose
-    private Links links;
+    private Double count;
+ //   @SerializedName("_links")
+ //   @Expose
+  //  private Links links;
     @SerializedName("hits")
     @Expose
     private List<Hit> hits = null;
@@ -39,48 +39,38 @@ public class MyEdamamRecipeSearchResponse {
      * @param hits
      * @param count
      * @param from
-     * @param links
      * @param to
      */
-    public MyEdamamRecipeSearchResponse(Integer from, Integer to, Integer count, Links links, List<Hit> hits) {
+    public MyEdamamRecipeSearchResponse(Double from, Double to, Double count, List<Hit> hits) {
         super();
         this.from = from;
         this.to = to;
         this.count = count;
-        this.links = links;
         this.hits = hits;
     }
 
-    public Integer getFrom() {
+    public Double getFrom() {
         return from;
     }
 
-    public void setFrom(Integer from) {
+    public void setFrom(Double from) {
         this.from = from;
     }
 
-    public Integer getTo() {
+    public Double getTo() {
         return to;
     }
 
-    public void setTo(Integer to) {
+    public void setTo(Double to) {
         this.to = to;
     }
 
-    public Integer getCount() {
+    public Double getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(Double count) {
         this.count = count;
-    }
-
-    public Links getLinks() {
-        return links;
-    }
-
-    public void setLinks(Links links) {
-        this.links = links;
     }
 
     public List<Hit> getHits() {

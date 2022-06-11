@@ -1,0 +1,28 @@
+[33m5e3fb1f[m[33m ([m[1;36mHEAD -> [m[1;32mweek2[m[33m)[m HEAD@{0}: commit: This will make slight changes to build.gradle, EdamamClient and recipesactivity.
+[33m6074193[m[33m ([m[1;31morigin/week2[m[33m)[m HEAD@{1}: commit: This will alter the arrangement recipe list item.
+[33mcd96f46[m HEAD@{2}: commit: This will add Recipelist adapter.
+[33m74fc476[m HEAD@{3}: commit: This will add an individual item layout for a recipe.
+[33m277bf90[m HEAD@{4}: commit: This will modify recepes layout.
+[33m2cde081[m HEAD@{5}: commit: This will add an EdamamClient.
+[33mdc25e9e[m HEAD@{6}: commit: This will add an interface and models.
+[33me9190d4[m HEAD@{7}: reset: moving to HEAD~1
+[33ma59d66c[m HEAD@{8}: commit: This will add models.
+[33me9190d4[m HEAD@{9}: commit: This will add retrofit dependencies and grant internet permision in the manifest.
+[33m75ddd7c[m HEAD@{10}: commit: This will add Constants required by the API.
+[33m4eba4d4[m HEAD@{11}: commit: This will add EdamamId and EdamamApiKey to grdle properties.
+[33m9c653c8[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{12}: checkout: moving from master to week2
+[33m9c653c8[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{13}: commit: This will an About screen button that navigates from the main screen.
+[33md98d0fa[m HEAD@{14}: commit: This will add a read me.
+[33m67e44d2[m HEAD@{15}: commit: This will style the about xml.
+[33mff2b02f[m HEAD@{16}: commit: This will finish the display of recipes, remove the AppBar from homescreen and initialize an empty about page.
+[33m67862d0[m HEAD@{17}: commit: This will create a custom adapter to use to display a recipe and its source.
+[33m2062c29[m HEAD@{18}: commit: This will use get intent to confirm the user input from the homepage.
+[33md6756c1[m HEAD@{19}: commit: This will add the capability to use the button of find recipes and able to retrieve the contents entered by user.
+[33m29e6d63[m HEAD@{20}: commit: This will implement an interface View.OnClicklistener in the main activity.
+[33md81e079[m HEAD@{21}: commit: This will bind all the views to be used in business in respective areas.
+[33m63e6d90[m HEAD@{22}: commit: This will add butterknife dependencies to gradle to use in binding views.
+[33m95a333c[m HEAD@{23}: commit: This will add a new Recipes activity and corresponding layout, it will also add a listview to the to the same layout.
+[33m9abaaca[m HEAD@{24}: commit: This will an editText to enter ingredients and a button to submit.
+[33mbb0a853[m HEAD@{25}: commit: This will add a background image to main screen.
+[33me3a86a5[m HEAD@{26}: commit: This will add the Application Brand Name and Style.
+[33mfdff104[m HEAD@{27}: commit (initial): This will iniatialize the application

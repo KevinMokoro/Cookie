@@ -63,13 +63,14 @@ public class RecipesActivity extends AppCompatActivity {
 
                 hideProgressBar();
 
-                if (response.isSuccessful()) {
+                if (true) {
                     recipes = response.body().getHits();
-                    mAdapter = new RecipeListAdapter(RecipesActivity.this, recipes);
-                    mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(RecipesActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
+                    mAdapter = new RecipeListAdapter(RecipesActivity.this, recipes);
+                    mRecyclerView.setAdapter(mAdapter);
+
 
 
                     showRecipes();
@@ -80,6 +81,7 @@ public class RecipesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MyEdamamRecipeSearchResponse> call, Throwable t) {
+                Log.e("fail",t.getMessage());
                 hideProgressBar();
                 showFailureMessage();
             }

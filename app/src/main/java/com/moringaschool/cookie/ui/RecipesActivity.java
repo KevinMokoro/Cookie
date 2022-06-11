@@ -71,7 +71,7 @@ public class RecipesActivity extends AppCompatActivity {
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
 
-//                    Log.e(TAG,String.valueOf(recipe));
+
                     showRecipes();
                 } else {
                     showUnsuccessfulMessage();

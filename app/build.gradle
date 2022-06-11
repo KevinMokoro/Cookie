@@ -43,13 +43,13 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.localebro:okhttpprofiler:1.0.8'
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
 
 }

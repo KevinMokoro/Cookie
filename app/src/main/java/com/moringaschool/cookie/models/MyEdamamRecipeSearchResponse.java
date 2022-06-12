@@ -6,9 +6,12 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.moringaschool.cookie.models.Hit;
+
+import org.parceler.Parcel;
 //import com.moringaschool.cookie.models.Links;
 
 //@Generated("jsonschema2pojo")
+@Parcel
 public class MyEdamamRecipeSearchResponse {
 
     @SerializedName("from")

@@ -21,9 +21,9 @@ public class Recipe {
 //    @SerializedName("images")
 //    @Expose
 //    private Images images;
-//    @SerializedName("source")
-//    @Expose
-//    private String source;
+      @SerializedName("source")
+      @Expose
+      private String source;
       @SerializedName("url")
       @Expose
       private String url;
@@ -110,12 +110,13 @@ public class Recipe {
 //     * @param ingredientLines
 //     * @param glycemicIndex
 //     */
-    public Recipe(String uri, String label, String image, String url) {
+    public Recipe(String uri, String label, String image, String url, String source) {
         super();
         this.uri = uri;
         this.label = label;
         this.image = image;
         this.url = url;
+        this.source = source;
 
     }
 
@@ -148,6 +149,13 @@ public class Recipe {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getSource() {
+        return source;
+    }
+    public void setSource(String source) {
+        this.source = source;
     }
 
 

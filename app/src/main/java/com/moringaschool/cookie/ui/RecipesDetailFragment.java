@@ -1,5 +1,7 @@
 package com.moringaschool.cookie.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,13 +24,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class RecipesDetailFragment extends Fragment {
+public class RecipesDetailFragment extends Fragment implements View.OnClickListener {
 
-    @BindView(R.id.recipeImageView) ImageView mImageView;
-    @BindView(R.id.recipeNameTextView) TextView mNameLabel;
-    @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
-    @BindView(R.id.saveRecipeButton) Button mSaveRecipeButton;
-    @BindView(R.id.sourceTextView) TextView mSourceTextView;
+    @BindView(R.id.recipeImageView)
+    ImageView mImageView;
+    @BindView(R.id.recipeNameTextView)
+    TextView mNameLabel;
+    @BindView(R.id.websiteTextView)
+    TextView mWebsiteLabel;
+    @BindView(R.id.saveRecipeButton)
+    Button mSaveRecipeButton;
+    @BindView(R.id.sourceTextView)
+    TextView mSourceTextView;
 
     private Hit mRecipe;
 
@@ -57,20 +64,24 @@ public class RecipesDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_recipes_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_recipes_detail, container, false);
         ButterKnife.bind(this, view);
         Picasso.get().load(mRecipe.getRecipe().getImage()).into(mImageView);
 
         mNameLabel.setText(mRecipe.getRecipe().getLabel());
-        mSourceTextView.setText(mRecipe.getRecipe().getSource());
+        mSourceTextView.setText("Source: " + mRecipe.getRecipe().getSource());
+        mWebsiteLabel.setOnClickListener(this);
 
         return view;
 
-
-
     }
 
-
-
-
+    @Override
+    public void onClick(View v) {
+        if (v == mWebsiteLabel) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(mRecipe.getRecipe().getUrl()));
+            startActivity(webIntent);
+        }
     }
+}

@@ -11,18 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.moringaschool.cookie.MyRecipesAdapter;
 import com.moringaschool.cookie.R;
 import com.moringaschool.cookie.adapters.RecipeListAdapter;
 import com.moringaschool.cookie.models.Hit;
 import com.moringaschool.cookie.models.MyEdamamRecipeSearchResponse;
-import com.moringaschool.cookie.models.Recipe;
 import com.moringaschool.cookie.network.EdamamApi;
 import com.moringaschool.cookie.network.EdamamClient;
 
@@ -34,8 +29,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import android.util.Log;
-public class RecipesActivity extends AppCompatActivity {
-    private static final String TAG = RecipesActivity.class.getSimpleName();
+public class RecipesListActivity extends AppCompatActivity {
+    private static final String TAG = RecipesListActivity.class.getSimpleName();
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
@@ -65,10 +60,10 @@ public class RecipesActivity extends AppCompatActivity {
 
                 if (true) {
                     recipes = response.body().getHits();
-                    RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(RecipesActivity.this);
+                    RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(RecipesListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
-                    mAdapter = new RecipeListAdapter(RecipesActivity.this, recipes);
+                    mAdapter = new RecipeListAdapter(RecipesListActivity.this, recipes);
                     mRecyclerView.setAdapter(mAdapter);
 
 

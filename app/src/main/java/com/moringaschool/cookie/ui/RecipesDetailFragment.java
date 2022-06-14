@@ -13,7 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.moringaschool.cookie.Constants;
 import com.moringaschool.cookie.R;
 import com.moringaschool.cookie.models.Hit;
 import com.squareup.picasso.Picasso;
@@ -72,6 +76,8 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
         mSourceTextView.setText("Source: " + mRecipe.getRecipe().getSource());
         mWebsiteLabel.setOnClickListener(this);
 
+        mSaveRecipeButton.setOnClickListener(this);
+
         return view;
 
     }
@@ -82,6 +88,12 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
             Intent webIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse(mRecipe.getRecipe().getUrl()));
             startActivity(webIntent);
+        } if(v == mSaveRecipeButton) {
+            DatabaseReference recipeRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_RECIPES);
+            recipeRef.push().setValue(mRecipe);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 }

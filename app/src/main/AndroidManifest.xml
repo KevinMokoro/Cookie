@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Cookie"
         tools:targetApi="31">
         <activity
+            android:name=".SavedRecipeListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.RecipesDetailActivity"
             android:exported="false" />
         <activity

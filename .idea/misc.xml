@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/layout/about.xml" value="0.15217391304347827" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_recipes.xml" value="0.15217391304347827" />
         <entry key="app/src/main/res/layout/activity_recipes_detail.xml" value="0.19375" />

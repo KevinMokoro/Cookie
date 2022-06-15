@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.moringaschool.cookie.Constants;
 import com.moringaschool.cookie.R;
 import com.moringaschool.cookie.adapters.RecipeListAdapter;
 import com.moringaschool.cookie.models.Hit;
@@ -30,7 +33,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.util.Log;
 public class RecipesListActivity extends AppCompatActivity {
+
     private static final String TAG = RecipesListActivity.class.getSimpleName();
+
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentRecipe;
+
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
@@ -46,8 +55,13 @@ public class RecipesListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        Intent intent = getIntent();
-        String ingredient = intent.getStringExtra("ingredient");
+      //  Intent intent = getIntent();
+    //    String ingredient = intent.getStringExtra("ingredient");
+
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentRecipe = mSharedPreferences.getString(Constants.PREFERENCES_RECIPE_KEY, null);
+
 
         EdamamApi client = EdamamClient.getClient();
         Call<MyEdamamRecipeSearchResponse> call = client.getRecipes(SEARCH_TYPE,ingredient,EDAMAM_ID,EDAMAM_API_KEY);

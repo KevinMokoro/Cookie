@@ -50,8 +50,8 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
     public void onClick(View view) {
         final ArrayList<Hit> recipes = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RECIPES);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {

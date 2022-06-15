@@ -42,7 +42,7 @@ public class SavedRecipeListActivity extends AppCompatActivity {
         mRecipeReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RECIPES);
         setUpFirebaseAdapter();
         hideProgressBar();
-        showRestaurants();
+        showRecipes();
 
     }
 
@@ -83,7 +83,7 @@ public class SavedRecipeListActivity extends AppCompatActivity {
         }
     }
 
-    private void showRestaurants() {
+    private void showRecipes() {
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 

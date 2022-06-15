@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.findRecipes) Button mFindRecipes;
     @BindView(R.id.ingredientEditText) EditText mIngredientEditText;
     @BindView(R.id.aboutButton) Button mAboutButton;
+    @BindView(R.id.savedRecipesButton) Button mSavedRecipesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
         mFindRecipes.setOnClickListener(this);
         mAboutButton.setOnClickListener(this);
+        mSavedRecipesButton.setOnClickListener(this);
 
 
 
@@ -53,8 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, RecipesListActivity.class);
             intent.putExtra("ingredient",ingredient);
             startActivity(intent);
-        } else if (v == mAboutButton){
+        } if (v == mAboutButton){
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+        }if (v == mSavedRecipesButton) {
+            Intent intent = new Intent(MainActivity.this, SavedRecipeListActivity.class);
             startActivity(intent);
         }
     }

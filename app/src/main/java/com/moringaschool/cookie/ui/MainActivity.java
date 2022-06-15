@@ -1,5 +1,6 @@
 package com.moringaschool.cookie.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.cookie.Constants;
@@ -27,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.aboutButton) Button mAboutButton;
     @BindView(R.id.savedRecipesButton) Button mSavedRecipesButton;
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,10 +43,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAboutButton.setOnClickListener(this);
         mSavedRecipesButton.setOnClickListener(this);
 
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                //display welcome message
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                } else {
 
-
-
+                }
+            }
+        };
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
     @Override
     public void onClick(View v){
         if(v == mFindRecipes) {

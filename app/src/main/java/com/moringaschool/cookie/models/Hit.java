@@ -15,6 +15,8 @@ public class Hit {
     @Expose
     private Recipe recipe;
 
+    private String pushId;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -40,7 +42,13 @@ public class Hit {
         this.recipe = recipe;
     }
 
+    public String getPushId() {
+        return pushId;
+    }
 
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
 
 
 

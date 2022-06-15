@@ -12,8 +12,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.moringaschool.cookie.Constants;
@@ -62,9 +66,53 @@ public class RecipesListActivity extends AppCompatActivity {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentRecipe = mSharedPreferences.getString(Constants.PREFERENCES_RECIPE_KEY, null);
 
+        if(mRecentRecipe != null){
+            fetchRecipes(mRecentRecipe);
+        }
+    }
+
+
+    private void addToSharedPreferences(String recipe) {
+        mEditor.putString(Constants.PREFERENCES_RECIPE_KEY, recipe).apply();
+    }
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String recipe) {
+                addToSharedPreferences(recipe);
+                fetchRecipes(recipe);
+                return false;
+            }
+
+
+            @Override
+            public boolean onQueryTextChange(String recipe) {
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    private void fetchRecipes( String recipe ) {
 
         EdamamApi client = EdamamClient.getClient();
-        Call<MyEdamamRecipeSearchResponse> call = client.getRecipes(SEARCH_TYPE,ingredient,EDAMAM_ID,EDAMAM_API_KEY);
+        Call<MyEdamamRecipeSearchResponse> call = client.getRecipes(SEARCH_TYPE,recipe,EDAMAM_ID,EDAMAM_API_KEY);
 
         call.enqueue(new Callback<MyEdamamRecipeSearchResponse>() {
             @Override
@@ -98,7 +146,12 @@ public class RecipesListActivity extends AppCompatActivity {
         });
 
 
+
+
     }
+
+
+
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
         mErrorTextView.setVisibility(View.VISIBLE);

@@ -19,20 +19,12 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-  //  private DatabaseReference mSearchedRecipeReference;
-
     @BindView(R.id.findRecipes) Button mFindRecipes;
-    @BindView(R.id.ingredientEditText) EditText mIngredientEditText;
     @BindView(R.id.aboutButton) Button mAboutButton;
     @BindView(R.id.savedRecipesButton) Button mSavedRecipesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-      //  mSearchedRecipeReference = FirebaseDatabase
-      //          .getInstance()
-       //         .getReference()
-      //          .child(Constants.FIREBASE_CHILD_SEARCHED_RECIPE);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -48,12 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         if(v == mFindRecipes) {
-            String ingredient = mIngredientEditText.getText().toString();
-
-         //   saveRecipeToFirebase(ingredient);
-
             Intent intent = new Intent(MainActivity.this, RecipesListActivity.class);
-            intent.putExtra("ingredient",ingredient);
             startActivity(intent);
         } if (v == mAboutButton){
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
@@ -63,7 +50,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
     }
-  //  public void saveRecipeToFirebase(String recipe) {
-  //      mSearchedRecipeReference.setValue(recipe);
- //   }
 }

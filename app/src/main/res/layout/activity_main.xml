@@ -28,20 +28,6 @@
         android:text="KOOKIE"
         android:textSize="60sp" />
 
-    <EditText
-        android:id="@+id/ingredientEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/white"
-        android:hint="Enter your ingredient"
-        android:paddingTop="12sp"
-        android:textColor="@color/black"
-        android:textSize="34sp"
-        android:textStyle="normal|bold"
-        android:layout_above="@+id/findRecipes"
-        android:layout_marginBottom="115dp"/>
 
     <Button
         android:id="@+id/findRecipes"

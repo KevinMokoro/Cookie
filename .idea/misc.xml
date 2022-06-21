@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/layout/activity_restaurant_detail.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/fragment_recipes_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/recipe_list_item.xml" value="0.15217391304347827" />
+        <entry key="app/src/main/res/layout/recipe_list_item_drag.xml" value="0.2" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/menu_search.xml" value="0.19270833333333334" />
       </map>

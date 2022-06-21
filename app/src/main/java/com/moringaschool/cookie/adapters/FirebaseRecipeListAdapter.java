@@ -1,6 +1,7 @@
 package com.moringaschool.cookie.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,8 +18,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.moringaschool.cookie.R;
 import com.moringaschool.cookie.models.Hit;
+import com.moringaschool.cookie.models.Recipe;
+import com.moringaschool.cookie.ui.RecipesDetailActivity;
 import com.moringaschool.cookie.util.ItemTouchHelperAdapter;
 import com.moringaschool.cookie.util.OnStartDragListener;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -85,6 +90,18 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Hit, Fire
                 return false;
             }
         });
+
+        firebaseRecipeViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, RecipesDetailActivity.class);
+                intent.putExtra("position", firebaseRecipeViewHolder.getAdapterPosition());
+                intent.putExtra("recipes", Parcels.wrap(mRecipes));
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     @NonNull

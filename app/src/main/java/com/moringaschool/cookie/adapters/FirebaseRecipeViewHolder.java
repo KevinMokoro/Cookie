@@ -1,7 +1,10 @@
 package com.moringaschool.cookie.adapters;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,13 +23,14 @@ import com.moringaschool.cookie.R;
 import com.moringaschool.cookie.models.Hit;
 import com.moringaschool.cookie.models.Recipe;
 import com.moringaschool.cookie.ui.RecipesDetailActivity;
+import com.moringaschool.cookie.util.ItemTouchHelperViewHolder;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
     View mView;
     Context mContext;
@@ -36,7 +40,7 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
+      //  itemView.setOnClickListener(this);
     }
 
     public void bindRecipe(Hit recipe) {
@@ -49,35 +53,52 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
     }
 
 
+//    @Override
+//    public void onClick(View view) {
+//        final ArrayList<Hit> recipes = new ArrayList<>();
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = user.getUid();
+//        DatabaseReference ref = FirebaseDatabase
+//                .getInstance()
+//                .getReference(Constants.FIREBASE_CHILD_RECIPES)
+//                .child(uid);
+//
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    recipes.add(snapshot.getValue(Hit.class));
+//                }
+//
+//                int itemPosition = getLayoutPosition();
+//
+//                Intent intent = new Intent(mContext, RecipesDetailActivity.class);
+//                intent.putExtra("position", itemPosition + "");
+//                intent.putExtra("recipes", Parcels.wrap(recipes));
+//
+//                mContext.startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//    }
+
     @Override
-    public void onClick(View view) {
-        final ArrayList<Hit> recipes = new ArrayList<>();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-        DatabaseReference ref = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_RECIPES)
-                .child(uid);
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    recipes.add(snapshot.getValue(Hit.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-
-                Intent intent = new Intent(mContext, RecipesDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("recipes", Parcels.wrap(recipes));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+    public void onItemSelected() {
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext,
+                R.animator.drag_scale_on);
+        set.setTarget(itemView);
+        set.start();
     }
+
+    @Override
+    public void onItemClear() {
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext,
+                R.animator.drag_scale_off);
+        set.setTarget(itemView);
+        set.start();
+    }
+
 }

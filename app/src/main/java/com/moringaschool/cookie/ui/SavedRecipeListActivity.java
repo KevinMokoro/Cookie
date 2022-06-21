@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.moringaschool.cookie.Constants;
 import com.moringaschool.cookie.R;
 import com.moringaschool.cookie.adapters.FirebaseRecipeListAdapter;
@@ -57,17 +58,18 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
-        mRecipeReference = FirebaseDatabase
+        Query query = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_RECIPES)
-                .child(uid);
+                .child(uid)
+                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
 
         FirebaseRecyclerOptions<Hit> options =
                 new FirebaseRecyclerOptions.Builder<Hit>()
-                        .setQuery(mRecipeReference, Hit.class)
+                        .setQuery(query, Hit.class)
                         .build();
 
-        mFirebaseAdapter = new FirebaseRecipeListAdapter(options, mRecipeReference,  this, this);
+        mFirebaseAdapter = new FirebaseRecipeListAdapter(options, query,  this, this);
 
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -91,6 +93,12 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
             mFirebaseAdapter.stopListening();
         }
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFirebaseAdapter.stopListening(); }
 
     public void onStartDrag(RecyclerView.ViewHolder viewHolder){
         mItemTouchHelper.startDrag(viewHolder);

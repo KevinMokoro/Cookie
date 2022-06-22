@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -44,6 +46,8 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
     TextView mSourceTextView;
 
     private Hit mRecipe;
+    private List<Hit> mRecipes;
+    private int mPosition;
 
 
     public RecipesDetailFragment() {
@@ -51,10 +55,11 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
     }
 
 
-    public static RecipesDetailFragment newInstance(Hit recipe) {
+    public static RecipesDetailFragment newInstance(List<Hit> recipe, Integer position) {
         RecipesDetailFragment recipeDetailFragment = new RecipesDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("recipe", Parcels.wrap(recipe));
+        args.putParcelable(Constants.EXTRA_KEY_RECIPES, Parcels.wrap(recipe));
+        args.putInt(Constants.EXTRA_KEY_POSITION, position);
         recipeDetailFragment.setArguments(args);
         return recipeDetailFragment;
     }
@@ -64,7 +69,9 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         assert getArguments() != null;
-        mRecipe = Parcels.unwrap(getArguments().getParcelable("recipe"));
+        mRecipes = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_RECIPES));
+        mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
+        mRecipe = mRecipes.get(mPosition);
     }
 
     @Override

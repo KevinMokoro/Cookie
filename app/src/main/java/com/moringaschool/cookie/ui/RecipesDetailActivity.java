@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.moringaschool.cookie.Constants;
 import com.moringaschool.cookie.R;
 import com.moringaschool.cookie.adapters.RecipePagerAdapter;
 import com.moringaschool.cookie.models.Hit;
@@ -32,8 +33,8 @@ public class RecipesDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        mRecipes = Parcels.unwrap(getIntent().getParcelableExtra("recipes"));
-        int startingPosition = getIntent().getIntExtra("position", 0);
+        mRecipes = Parcels.unwrap(getIntent().getParcelableExtra(Constants.EXTRA_KEY_RECIPES));
+        int startingPosition = getIntent().getIntExtra(Constants.EXTRA_KEY_POSITION, 0);
 
 
         adapterViewPager = new RecipePagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, mRecipes);

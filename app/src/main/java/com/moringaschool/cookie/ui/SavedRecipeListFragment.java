@@ -119,7 +119,11 @@ public class SavedRecipeListFragment extends Fragment implements OnStartDragList
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mFirebaseAdapter.stopListening(); }
+        if(mFirebaseAdapter!= null) {
+            mFirebaseAdapter.stopListening();
+        }
+    }
+
 
 
     private void showRecipes() {

@@ -19,6 +19,7 @@ import com.moringaschool.cookie.models.Hit;
 import com.moringaschool.cookie.models.Recipe;
 import com.moringaschool.cookie.ui.RecipesDetailActivity;
 import com.moringaschool.cookie.ui.RecipesDetailFragment;
+import com.moringaschool.cookie.util.OnRecipeSelectedListener;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -29,18 +30,24 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder> {
+    private static final int MAX_WIDTH = 200;
+    private static final int MAX_HEIGHT = 200;
+
+    private OnRecipeSelectedListener mOnRecipeSelectedListener;
     private List<Hit> mRecipes;
     private Context mContext;
 
-    public RecipeListAdapter(Context context, List<Hit> recipes) {
+
+    public RecipeListAdapter(Context context, List<Hit> recipes, OnRecipeSelectedListener recipeSelectedListener) {
         mContext = context;
         mRecipes = recipes;
+        mOnRecipeSelectedListener = recipeSelectedListener;
     }
 
     @Override
     public RecipeListAdapter.RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false);
-        RecipeViewHolder viewHolder = new RecipeViewHolder(view);
+        RecipeViewHolder viewHolder = new RecipeViewHolder(view, mRecipes, mOnRecipeSelectedListener);
         return viewHolder;
     }
 
@@ -61,12 +68,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         private Context mContext;
         private int mOrientation;
+        private OnRecipeSelectedListener mRecipeSelectedListener;
+        private List<Hit> mRecipes;
 
-        public RecipeViewHolder(View itemView) {
+        public RecipeViewHolder(View itemView, List<Hit> recipes, OnRecipeSelectedListener recipeSelectedListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
             mOrientation = itemView.getResources().getConfiguration().orientation;
+            mRecipes = recipes;
+            mRecipeSelectedListener = recipeSelectedListener;
 
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                 createDetailFragment(0);
@@ -89,6 +100,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
+            mRecipeSelectedListener.onRecipeSelected(itemPosition, mRecipes);
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                 createDetailFragment(itemPosition);
             } else {

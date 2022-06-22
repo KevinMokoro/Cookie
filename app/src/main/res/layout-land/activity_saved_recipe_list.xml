@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_width="0dp"
         android:layout_weight="3"
-        tools:layout="@layout/fragment_recipe_list" />
+        tools:layout="@layout/fragment_saved_recipe_list" />
 
     <FrameLayout
         android:id="@+id/recipeDetailContainer"

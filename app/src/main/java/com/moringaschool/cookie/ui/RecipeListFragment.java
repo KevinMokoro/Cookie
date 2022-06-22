@@ -4,6 +4,7 @@ import static com.moringaschool.cookie.Constants.EDAMAM_API_KEY;
 import static com.moringaschool.cookie.Constants.EDAMAM_ID;
 import static com.moringaschool.cookie.Constants.SEARCH_TYPE;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -31,6 +32,7 @@ import com.moringaschool.cookie.models.Hit;
 import com.moringaschool.cookie.models.MyEdamamRecipeSearchResponse;
 import com.moringaschool.cookie.network.EdamamApi;
 import com.moringaschool.cookie.network.EdamamClient;
+import com.moringaschool.cookie.util.OnRecipeSelectedListener;
 
 import java.util.List;
 
@@ -56,6 +58,7 @@ public class RecipeListFragment extends Fragment {
 
     private RecipeListAdapter mAdapter;
     public List<Hit> recipes;
+    private OnRecipeSelectedListener mOnRecipeSelectedListener;
 
 
 
@@ -63,6 +66,15 @@ public class RecipeListFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnRecipeSelectedListener = (OnRecipeSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -144,7 +156,7 @@ public class RecipeListFragment extends Fragment {
                     RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(getActivity());
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
-                    mAdapter = new RecipeListAdapter(getActivity(), recipes);
+                    mAdapter = new RecipeListAdapter(getActivity(), recipes, mOnRecipeSelectedListener);
                     mRecyclerView.setAdapter(mAdapter);
 
 

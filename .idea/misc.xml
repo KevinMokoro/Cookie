@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout-land/fragment_recipes_detail.xml" value="0.21" />
+        <entry key="app/src/main/res/layout-land/recipe_list_item.xml" value="0.13802083333333334" />
+        <entry key="app/src/main/res/layout-land/recipe_list_item_drag.xml" value="0.13802083333333334" />
         <entry key="app/src/main/res/layout/about.xml" value="0.15217391304347827" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.19375" />

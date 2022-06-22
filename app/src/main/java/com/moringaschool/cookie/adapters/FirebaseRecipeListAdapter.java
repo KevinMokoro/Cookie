@@ -115,6 +115,7 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Hit, Fire
                     Intent intent = new Intent(mContext, RecipesDetailActivity.class);
                     intent.putExtra(Constants.EXTRA_KEY_POSITION, firebaseRecipeViewHolder.getAdapterPosition());
                     intent.putExtra(Constants.EXTRA_KEY_RECIPES, Parcels.wrap(mRecipes));
+                    intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_SAVED);
                     mContext.startActivity(intent);
                 }
             }
@@ -122,7 +123,7 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Hit, Fire
 
     }
     private void createDetailFragment(int position) {
-        RecipesDetailFragment detailFragment = RecipesDetailFragment.newInstance(mRecipes, position);
+        RecipesDetailFragment detailFragment = RecipesDetailFragment.newInstance(mRecipes, position, Constants.SOURCE_SAVED);
         FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.recipeDetailContainer, detailFragment);
         ft.commit();

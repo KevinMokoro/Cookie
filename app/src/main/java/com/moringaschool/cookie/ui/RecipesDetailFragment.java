@@ -48,6 +48,7 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
     private Hit mRecipe;
     private List<Hit> mRecipes;
     private int mPosition;
+    private String mSource;
 
 
     public RecipesDetailFragment() {
@@ -55,11 +56,12 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
     }
 
 
-    public static RecipesDetailFragment newInstance(List<Hit> recipe, Integer position) {
+    public static RecipesDetailFragment newInstance(List<Hit> recipe, Integer position, String source) {
         RecipesDetailFragment recipeDetailFragment = new RecipesDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable(Constants.EXTRA_KEY_RECIPES, Parcels.wrap(recipe));
         args.putInt(Constants.EXTRA_KEY_POSITION, position);
+        args.putString(Constants.KEY_SOURCE, source);
         recipeDetailFragment.setArguments(args);
         return recipeDetailFragment;
     }
@@ -72,6 +74,8 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
         mRecipes = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_RECIPES));
         mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
         mRecipe = mRecipes.get(mPosition);
+        mSource = getArguments().getString(Constants.KEY_SOURCE);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -85,10 +89,12 @@ public class RecipesDetailFragment extends Fragment implements View.OnClickListe
         mSourceTextView.setText("Source: " + mRecipe.getRecipe().getSource());
         mWebsiteLabel.setOnClickListener(this);
 
-        mSaveRecipeButton.setOnClickListener(this);
-
+        if(mSource.equals(Constants.SOURCE_SAVED)) {
+            mSaveRecipeButton.setVisibility(View.GONE);
+        } else {
+            mSaveRecipeButton.setOnClickListener(this);
+        }
         return view;
-
     }
 
     @Override

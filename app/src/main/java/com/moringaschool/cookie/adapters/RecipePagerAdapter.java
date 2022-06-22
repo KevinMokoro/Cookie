@@ -12,15 +12,17 @@ import java.util.List;
 
 public class RecipePagerAdapter extends FragmentPagerAdapter {
     private List<Hit> mRecipes;
+    private String mSource;
 
-    public RecipePagerAdapter (@NonNull FragmentManager fm, int behavior, List<Hit> recipes) {
+    public RecipePagerAdapter (@NonNull FragmentManager fm, int behavior, List<Hit> recipes, String source) {
         super(fm, behavior);
         mRecipes = recipes;
+        mSource = source;
     }
 
     @Override
     public RecipesDetailFragment getItem(int position) {
-        return RecipesDetailFragment.newInstance(mRecipes, position);
+        return RecipesDetailFragment.newInstance(mRecipes, position, mSource);
     }
 
     @Override

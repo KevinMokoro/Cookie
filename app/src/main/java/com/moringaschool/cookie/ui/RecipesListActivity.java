@@ -44,6 +44,7 @@ import org.parceler.Parcels;
 public class RecipesListActivity extends AppCompatActivity implements OnRecipeSelectedListener {
     private Integer mPosition;
     List<Hit> mRecipes;
+    String mSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +56,13 @@ public class RecipesListActivity extends AppCompatActivity implements OnRecipeSe
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 mPosition = savedInstanceState.getInt(Constants.EXTRA_KEY_POSITION);
                 mRecipes = Parcels.unwrap(savedInstanceState.getParcelable(Constants.EXTRA_KEY_RECIPES));
+                mSource = savedInstanceState.getString(Constants.KEY_SOURCE);
 
                 if (mPosition != null && mRecipes != null) {
                     Intent intent = new Intent(this, RecipesDetailActivity.class);
                     intent.putExtra(Constants.EXTRA_KEY_POSITION, mPosition);
                     intent.putExtra(Constants.EXTRA_KEY_RECIPES, Parcels.wrap(mRecipes));
+                    intent.putExtra(Constants.KEY_SOURCE, mSource);
                     startActivity(intent);
                 }
 
@@ -76,13 +79,15 @@ public class RecipesListActivity extends AppCompatActivity implements OnRecipeSe
         if (mPosition != null && mRecipes != null) {
             outState.putInt(Constants.EXTRA_KEY_POSITION, mPosition);
             outState.putParcelable(Constants.EXTRA_KEY_RECIPES, Parcels.wrap(mRecipes));
+            outState.putString(Constants.KEY_SOURCE, mSource);
         }
 
     }
 
     @Override
-    public void onRecipeSelected(Integer position, List<Hit> recipes) {
+    public void onRecipeSelected(Integer position, List<Hit> recipes, String source) {
         mPosition = position;
         mRecipes = recipes;
+        mSource = source;
     }
 }

@@ -31,85 +31,10 @@ import com.moringaschool.cookie.util.SimpleItemTouchHelperCallback;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SavedRecipeListActivity extends AppCompatActivity implements OnStartDragListener {
-
-    private DatabaseReference mRecipeReference;
-    private FirebaseRecipeListAdapter mFirebaseAdapter;
-    private ItemTouchHelper mItemTouchHelper;
-
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
-
+public class SavedRecipeListActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipes);
-        ButterKnife.bind(this);
-
-        setUpFirebaseAdapter();
-        hideProgressBar();
-        showRecipes();
-
+        setContentView(R.layout.activity_saved_recipe_list);
     }
-
-    private void setUpFirebaseAdapter(){
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-
-        Query query = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_RECIPES)
-                .child(uid)
-                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
-
-        FirebaseRecyclerOptions<Hit> options =
-                new FirebaseRecyclerOptions.Builder<Hit>()
-                        .setQuery(query, Hit.class)
-                        .build();
-
-        mFirebaseAdapter = new FirebaseRecipeListAdapter(options, query,  this, this);
-
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mFirebaseAdapter);
-        mRecyclerView.setHasFixedSize(true);
-
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mFirebaseAdapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mFirebaseAdapter!= null) {
-            mFirebaseAdapter.stopListening();
-        }
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mFirebaseAdapter.stopListening(); }
-
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder){
-        mItemTouchHelper.startDrag(viewHolder);
-    }
-
-    private void showRecipes() {
-        mRecyclerView.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgressBar() {
-        mProgressBar.setVisibility(View.GONE);
-    }
-
 }

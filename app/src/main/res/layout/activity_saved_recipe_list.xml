@@ -6,19 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.RecipesListActivity">
 
-    <!--        android:visibility="gone" />-->
-
 
     <fragment
-        android:id="@+id/fragmentRecipeList"
-        android:name="com.moringaschool.cookie.ui.RecipeListFragment"
+        android:id="@+id/fragmentRestaurantList"
+        android:name="com.moringaschool.cookie.ui.SavedRecipeListFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_recipe_list" />
-
+        tools:layout="@layout/fragment_saved_recipe_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

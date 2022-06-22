@@ -60,7 +60,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:background="@color/teal_700"
-        android:text="My Saved Restaurants"
+        android:text="SAVED RECIPES"
         android:textColor="@color/white"
         android:visibility="visible" />
 
